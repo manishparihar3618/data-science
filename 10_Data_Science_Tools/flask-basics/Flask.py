@@ -10,7 +10,6 @@ app = Flask(__name__)
 def welcome():
     return "Welcome to this flask course"
 
-
 if __name__ == '__main__':
     app.run() 
 
