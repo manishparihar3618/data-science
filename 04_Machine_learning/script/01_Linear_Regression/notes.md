@@ -6,4 +6,4 @@ Linear Regression is a supervised machine learning algorithm used to predict con
 Examples:
 - House Price Prediction
 - Flight Price Prediction
-- Salary Prediction
+- Salary Prediction                                 
