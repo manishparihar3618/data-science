@@ -18,3 +18,6 @@ Testing Data → Used to evaluate model performance.
 Common split: 80% Train, 20% Test.
 
 
+
+#Add ridge lasso and elasticnet 
+
