@@ -1,115 +1,72 @@
-# Web Scraping with Beautiful Soup
+# Web Scraping & APIs
 
-## What is Web Scraping?
+This module covers practical web scraping and API interaction techniques for data science and machine learning pipelines.
 
-Web scraping is the process of extracting data from websites automatically using Python.
+---
 
-**Common ML Uses**
+## 📁 Directory Structure
 
-* Dataset collection
-* Price prediction
-* Sentiment analysis
-* News scraping
-* Job market analysis
+- [`01_API_basics.ipynb`](file:///c:/Users/Manis/OneDrive/vs%20COdE%20Python/Data-Science-Journey/06_Web_Scraping_and_APIs/01_API_basics.ipynb): Basics of REST APIs, HTTP methods, headers, and parsing JSON.
+- [`02_web_scraping_BeautifulSoup.ipynb`](file:///c:/Users/Manis/OneDrive/vs%20COdE%20Python/Data-Science-Journey/06_Web_Scraping_and_APIs/02_web_scraping_BeautifulSoup.ipynb): Foundations of HTML parsing with BeautifulSoup.
+- [`03_imdb_web_scraping_complete.ipynb`](file:///c:/Users/Manis/OneDrive/vs%20COdE%20Python/Data-Science-Journey/06_Web_Scraping_and_APIs/03_imdb_web_scraping_complete.ipynb): Comprehensive guide to scraping modern dynamic sites (Next.js, JSON-LD, anti-bot handling) and exploratory data analysis.
+- [`imdb_scraper/`](file:///c:/Users/Manis/OneDrive/vs%20COdE%20Python/Data-Science-Journey/06_Web_Scraping_and_APIs/imdb_scraper): Complete, production-grade IMDb scraper package.
+- [`demo_imdb_scraper.py`](file:///c:/Users/Manis/OneDrive/vs%20COdE%20Python/Data-Science-Journey/06_Web_Scraping_and_APIs/demo_imdb_scraper.py): Executable script demonstrating all scraper functionalities.
 
-## Required Libraries
+---
+
+## 🎬 Complete IMDb Scraper Package
+
+A full-featured scraper capable of handling modern Next.js client-side hydration, AWS WAF challenges, and structured JSON-LD schemas.
+
+### 🌟 Features
+1. **Instant Search**: Sub-second search for movies, shows, and people using IMDb's Suggestion API.
+2. **Top Charts**: Scrapes Top 250 Movies, Top 250 TV Shows, and Most Popular (MovieMeter/TVMeter).
+3. **Deep Metadata**: Retrieves Title, Release Date, Rating, Vote Count, Metascore, Runtime, Certificate, Genres, Directors, Writers, Cast, Box Office (Budget & Worldwide Gross), Plot, Poster, and Trailer URLs.
+4. **Anti-Detection**: Built-in stealth browser engine bypassing AWS WAF / Cloudflare challenges.
+5. **Data Export**: Directly converts to Pandas DataFrame, CSV, or JSON.
+
+---
+
+### 💻 Python Usage
 
 ```python
-import requests
-from bs4 import BeautifulSoup
+from imdb_scraper import IMDbScraper
+
+with IMDbScraper(headless=True) as scraper:
+    # 1. Instant Search
+    results = scraper.search("Interstellar", limit=5)
+    print(results)
+
+    # 2. Scrape Top 250 Movies
+    top_movies = scraper.get_top_250_movies(limit=50)
+    df = scraper.to_dataframe(top_movies)
+    print(df.head())
+
+    # 3. Deep Movie Details (Budget, Gross, Cast, Ratings)
+    details = scraper.get_movie_details("tt0111161")  # The Shawshank Redemption
+    print(details)
+
+    # 4. Save to files
+    scraper.save_to_csv(top_movies, "top_movies.csv")
+    scraper.save_to_json(details, "shawshank.json")
 ```
 
-Install:
+---
+
+### ⌨️ CLI Usage
+
+You can also run scraping tasks directly from the command line:
 
 ```bash
-pip install requests beautifulsoup4 lxml
-```
+# Instant Search
+python -m imdb_scraper.cli search "The Dark Knight"
 
----
+# Top 50 Movies to CSV
+python -m imdb_scraper.cli top-movies --limit 50 --output top50_movies.csv
 
-## Basic Workflow
+# Top 25 TV Shows to JSON
+python -m imdb_scraper.cli top-tv --limit 25 --output top25_tv.json
 
-```
-URL
- ↓
-requests.get()
- ↓
-HTML Response
- ↓
-BeautifulSoup()
- ↓
-Find Elements
- ↓
-Extract Data
- ↓
-Store in CSV / Database
-```
-
----
-
-## Basic Example
-
-```python
-import requests
-from bs4 import BeautifulSoup
-
-url = "https://example.com"
-
-headers = {
-    "User-Agent": "Mozilla/5.0"
-}
-
-response = requests.get(url, headers=headers)
-
-soup = BeautifulSoup(response.text, "html.parser")
-
-print(soup.title.text)
-```
-
----
-
-## Common Methods
-
-```python
-soup.find("tag")           # First matching element
-soup.find_all("tag")       # All matching elements
-soup.select(".class")      # CSS selector
-soup.select_one("#id")     # Single CSS selector
-
-tag.text                   # Get text
-tag.get("href")            # Get attribute
-```
-
----
-
-## Common Status Codes
-
-* **200** → Success
-* **403** → Forbidden
-* **404** → Not Found
-* **500** → Server Error
-
----
-
-## Best Practices
-
-* Use a **User-Agent** header.
-* Check `response.status_code`.
-* Respect `robots.txt` and website policies.
-* Save extracted data using **Pandas**.
-
----
-
-## Output Example
-
-```
-Website
-   ↓
-Requests
-   ↓
-BeautifulSoup
-   ↓
-Extract Data
-   ↓
-CSV / Excel / Database
+# Deep Movie Details
+python -m imdb_scraper.cli details tt1375666 --output inception.json
 ```

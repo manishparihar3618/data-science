@@ -1,0 +1,56 @@
+{
+  "id": "tt1375666",
+  "url": "https://www.imdb.com/title/tt1375666/",
+  "title": "Inception",
+  "type": "Movie",
+  "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO, but his tragic past may doom the project and his team to disaster.",
+  "rating": 8.8,
+  "vote_count": 2875737,
+  "content_rating": "PG-13",
+  "duration": "2h 28m",
+  "runtime_minutes": 148,
+  "release_date": "2010-07-16",
+  "genres": [
+    "Adventure",
+    "Sci-Fi",
+    "Thriller"
+  ],
+  "keywords": [
+    "dream",
+    "ambiguous ending",
+    "subconscious",
+    "mindbender",
+    "surprise ending"
+  ],
+  "directors": [
+    "Christopher Nolan"
+  ],
+  "writers": [
+    "Christopher Nolan"
+  ],
+  "stars": [
+    "Leonardo DiCaprio",
+    "Joseph Gordon-Levitt",
+    "Elliot Page"
+  ],
+  "poster_url": "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg",
+  "trailer_url": "https://www.imdb.com/video/vi2959588889/",
+  "metascore": 74,
+  "original_title": "Inception",
+  "budget": {
+    "amount": 160000000,
+    "currency": "USD",
+    "formatted": "USD 160,000,000"
+  },
+  "gross_worldwide": {
+    "amount": 839796627,
+    "currency": "USD",
+    "formatted": "USD 839,796,627"
+  },
+  "gross_domestic": null,
+  "spoken_languages": [
+    "English",
+    "Japanese",
+    "French"
+  ]
+}
